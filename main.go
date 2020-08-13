@@ -155,19 +155,19 @@ func main() {
 	host := getEnvWithDefault("HOST", "")
 	port := getEnvWithDefault("PORT", "8080")
 
-	tlsport := getEnvWithDefault("TLSPORT", "8443")
-	tlscert := getEnvWithDefault("TLSCERT", "/opt/ifconfig/.cf/ifconfig.io.crt")
-	tlskey := getEnvWithDefault("TLSKEY", "/opt/ifconfig/.cf/ifconfig.io.key")
+	//tlsport := getEnvWithDefault("TLSPORT", "8443")
+	//tlscert := getEnvWithDefault("TLSCERT", "/opt/ifconfig/.cf/ifconfig.io.crt")
+	//tlskey := getEnvWithDefault("TLSKEY", "/opt/ifconfig/.cf/ifconfig.io.key")
 
 	go func(errc chan error) {
 		errc <- r.Run(fmt.Sprintf("%s:%s", host, port))
 	}(errc)
 
-	go func(errc chan error) {
-		errc <- r.RunTLS(
-			fmt.Sprintf("%s:%s", host, tlsport),
-			tlscert, tlskey)
-	}(errc)
+	//go func(errc chan error) {
+	//	errc <- r.RunTLS(
+	//		fmt.Sprintf("%s:%s", host, tlsport),
+	//		tlscert, tlskey)
+	//}(errc)
 
 	fmt.Println(<-errc)
 }
